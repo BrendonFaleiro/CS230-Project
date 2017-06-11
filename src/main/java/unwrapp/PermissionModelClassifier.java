@@ -1,8 +1,7 @@
-package main.java;
+package unwrapp;
 
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayesUpdateable;
-import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
 import java.io.*;
@@ -54,7 +53,8 @@ public class PermissionModelClassifier {
             writer.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Caught Exception ! Continuing !!");
+            //e.printStackTrace();
         }
     }
 

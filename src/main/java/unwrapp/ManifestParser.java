@@ -1,11 +1,9 @@
-package main.java;
+package unwrapp;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-
-import static main.java.Utils.*;
 
 /**
  * Created by Shubham Mittal on 5/27/17.
@@ -15,8 +13,8 @@ public class ManifestParser {
         String pathToApk = Constants.PACKAGE_PREFIX + Constants.APK_EXTRACTED_FOLDER + sampledData + apkName + "/", mline, trimLine;
 
         //Read Manifest and extract activity list & permission list
-        List<String> activityList = new ArrayList<String>();
-        Set<String> permissionSet = new HashSet<String>();
+        List<String> activityList = new ArrayList<>();
+        Set<String> permissionSet = new HashSet<>();
         BufferedReader brManifest = new BufferedReader(new FileReader(pathToApk + Constants.MANIFEST_FILE));
         while ((mline = brManifest.readLine()) != null) {
             trimLine = mline.trim();
@@ -57,7 +55,7 @@ public class ManifestParser {
 
                             String tline, trimmedLine;
                             String[] strArr;
-                            List<String> opCodeList = new ArrayList<String>();
+                            List<String> opCodeList = new ArrayList<>();
 
                             while ((tline = brActivity.readLine()) != null) {
                                 trimmedLine = tline.trim();
@@ -90,7 +88,8 @@ public class ManifestParser {
                             listOfLists.add(opCodeList);
                         }
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.out.println("IOException while parsing Manifest !");
+                        //e.printStackTrace();
                     }
                 });
 
@@ -98,8 +97,8 @@ public class ManifestParser {
             System.out.println("\nCheck 3 -- Activity Processing Time: " + Duration.between(check2, check3));
             System.out.println("Check 3 -- Cumulative Time: " + Duration.between(start, check3));*/
 
-        if (listOfLists == null || listOfLists.isEmpty()) {
-            System.out.println("HALT! Empty opcodeList found for apk:: + " + apkName);
+        if (listOfLists.isEmpty()) {
+            System.out.println("No opcodes extracted for apk:: + " + apkName);
             return;
         } else {
             Utils.serialize(listOfLists, Constants.PACKAGE_PREFIX + Constants.BB_FOLDER + apkName + Constants.OUTPUT_FORMAT);
@@ -110,15 +109,19 @@ public class ManifestParser {
         if (!permissionSet.isEmpty()) {
             for (String permission : permissionSet) {
                 // Increment the global permission value
-                if (globalPermMap.containsKey(permission)) {
-                    globalPermMap.put(permission, globalPermMap.get(permission)+1);
+                if (Utils.globalPermMap.containsKey(permission)) {
+                    if (permission.equals("BIND_AUTOFILL")) {
+                        System.out.println("ASDAS");
+                    }
+                    Utils.globalPermMap.put(permission, Utils.globalPermMap.get(permission)+1);
                 }
             }
             if (sampledData.equals(Constants.ORIGINAL)) {
-                benignCount++;}
-            else {malwareCount++;}
+                Utils.benignCount++;}
+            else {
+                Utils.malwareCount++;}
             int[] bitVector = createFeatureVec(permissionSet);
-            globalFeatureMatrix.add(bitVector);
+            Utils.globalFeatureMatrix.add(bitVector);
             // Write individual feature vectors
             Utils.serialize(bitVector, Constants.PACKAGE_PREFIX + Constants.PERMISSIONS_FOLDER + sampledData + apkName + Constants.PERMISSION_OUT);
         } else {
@@ -127,10 +130,10 @@ public class ManifestParser {
     }
 
     private int[] createFeatureVec(Set<String> permissionSet) {
-        int[] bitVector = new int[globalPermMap.size()];
+        int[] bitVector = new int[Utils.globalPermMap.size()];
         for (String key : permissionSet) {
-            if (permIndexMap.containsKey(key)) {
-                bitVector[permIndexMap.get(key)] = 1;
+            if (Utils.permIndexMap.containsKey(key)) {
+                bitVector[Utils.permIndexMap.get(key)] = 1;
             }
         }
         return bitVector;

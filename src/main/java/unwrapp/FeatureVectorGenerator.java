@@ -1,7 +1,4 @@
-package main.java;
-
-import main.java.Constants;
-
+package unwrapp;
 import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -40,6 +37,7 @@ public class FeatureVectorGenerator {
         String str = "";
         int totalKGrams = 0;
         for (List<String> v : val) {
+            if (v==null) {continue;}
             str = v.toString();
             Pattern pattern1 = Pattern.compile("(?<=[.]class )(.*?)(?=,)");
             Pattern pattern2 = Pattern.compile("(?<=method )(.*?)(?=, [.]|\\])");

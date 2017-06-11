@@ -1,4 +1,4 @@
-package main.java;
+package unwrapp;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -523,6 +523,7 @@ public class Agglomerate{
         double distance = Double.MAX_VALUE;
 		
         for(ClusterNodeT node : topClusters){
+            if (node==null) {continue;}
             double d = euclideanDistance(bitVector, node.centroid);
 			
             if(distance > d){

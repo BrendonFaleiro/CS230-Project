@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:if="${apkName}">
+    <h2 th:text="${apkName}"/>
+</div>
+
+<th:block th:each="apk : ${apkObject}">
+    <tr>
+        <td th:text="${apk.apkName}"></td>
+        <td th:text="${apk.apkScore}"></td>
+    </tr>
+</th:block>
+
+
+</body>
+</html>

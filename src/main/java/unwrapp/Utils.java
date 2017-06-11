@@ -1,4 +1,4 @@
-package main.java;
+package unwrapp;
 
 import weka.core.Attribute;
 import weka.core.Instances;
@@ -8,7 +8,6 @@ import weka.core.converters.CSVLoader;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Stream;
 
 /**
  * Created by Shubham Mittal on 6/6/17.
@@ -36,22 +35,24 @@ public class Utils {
         }
         else {*/
             globalPermMap = new ConcurrentHashMap<>();
+            permIndexMap = new HashMap<>();
 
             try {
                 BufferedReader br = new BufferedReader(new FileReader(Constants.PACKAGE_PREFIX + Constants.PERMISSIONS_FILE + Constants.CSV));
                 String line;
                 StringBuilder sb = new StringBuilder();
+                int iter=0;
                 while ((line = br.readLine())!=null) {
                     sb.append(line.trim());
                     sb.append(Constants.COMMA_DELIMITER);
                     globalPermMap.putIfAbsent(line.trim(), 0);
+                    permIndexMap.put(line.trim(), iter++);
                 }
                 //sb.delete(sb.length()-2, sb.length());
                 header = sb.toString();
                 br.close();
             } catch (FileNotFoundException e) {
                 System.out.println("No such file as " + Constants.PACKAGE_PREFIX + Constants.PERMISSIONS_FILE + Constants.CSV);
-                e.printStackTrace();
             } catch (IOException e) {
                 System.out.println("Line could not be read!");
                 e.printStackTrace();
@@ -59,9 +60,9 @@ public class Utils {
         //}
 
         //Drain the globalPermMap into a map to allow indexing
-        permIndexMap = new HashMap<>();
+        //permIndexMap = new HashMap<>();
 
-        loadPermissionIndexMap(permIndexMap);
+        //loadPermissionIndexMap(permIndexMap);
     }
 
     protected static void serialize(Object object, String outputPath) throws IOException {
@@ -80,12 +81,12 @@ public class Utils {
         return globalPermMap;
     }
 
-    private static void loadPermissionIndexMap(Map<String, Integer> permIndexMap) {
+    /*private static void loadPermissionIndexMap(Map<String, Integer> permIndexMap) {
         int iter=0;
         for (String key : globalPermMap.keySet()) {
             permIndexMap.put(key, iter++);
         }
-    }
+    }*/
 
     protected static void covertCSV2Arff(String inputPath, String outputPath) throws IOException {
         CSVLoader csv = new CSVLoader();
@@ -108,6 +109,20 @@ public class Utils {
             sb.append(attribute.toString());
             sb.append(Constants.COMMA_DELIMITER);
             sb.append(hashMap.get(attribute));
+            sb.append(Constants.NEWLINE_CHARACTER);
+        }
+        writer.append(sb.toString());
+        writer.flush();
+        writer.close();
+    }
+
+    protected static void writeHashMap2CSV(Map<String, Integer> hashMap, String outputPath) throws IOException {
+        FileWriter writer = new FileWriter(outputPath);
+        StringBuilder sb = new StringBuilder();
+        for (String string: hashMap.keySet()) {
+            sb.append(string.toString());
+            sb.append(Constants.COMMA_DELIMITER);
+            sb.append(hashMap.get(string));
             sb.append(Constants.NEWLINE_CHARACTER);
         }
         writer.append(sb.toString());
