@@ -1,17 +1,327 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<body>
 
+<head>
+<title>Team UnwrAPP</title>
+<link type='text/css' rel="stylesheet" href="style.css" />
+<!-- Additional CSS for this page -->
+<style type="text/css">
+a:link {
+    color: #2E9AFE;
+}
+
+/* visited link */
+a:visited {
+    color: green;
+}
+
+/* mouse over link */
+a:hover {
+    color: red;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}
+img{
+
+}
+
+/*============================================================================
+    Standard elements styled below
+==============================================================================*/
+
+html, body{
+      position: relative;
+            background-color: #FFFFFF;*/
+      width:100%;
+            font-family:'Times';
+      overflow-x:hidden;
+      /*font-family:'Monda', sans-serif; */
+      color: #424242; 
+      /*font-weight: 100; */
+      font-size: 1em; 
+
+        }
+h1{ 
+font-size: 3em; 
+color: black; 
+font-weight: 400; 
+text-transform: uppercase; 
+letter-spacing: 2px; 
+margin-bottom: 30px; 
+font-family: 'Stardos Stencil', cursive;
+}
+p{ 
+font-family:'Monda', sans-serif; 
+color: #424242; 
+font-weight: 100; 
+font-size: 1.0em; 
+margin: 30px 0;
+}
+
+/*============================================================================
+All classes defined below.
+.Rectangular boxes are available in 3 colors: red, blue and light blue.
+.r stands for rounded cornered boxes.
+.rounded boxes available in 3 colors: red, grey and light blue.
+.button used for menus in navigation bar.
+===============================================================================*/
+
+.grey{
+font-size: 18px;
+font-family: arial, sans-serif;
+padding: 9px;
+background:#2E2E2E;
+margin:3 auto;
+color:#fff;
+}
+.red{
+font-size: 18px;
+font-family: arial, sans-serif;
+padding: 9px;
+background:#C53727;
+margin:3 auto;
+color:#fff;
+}
+.rred{
+border-radius: 5px;
+/*font-size: 14px;*/
+/*font-family: arial, sans-serif;*/
+padding: 7px;
+background:#C53727;
+margin:3 auto;
+color:#fff;
+}
+
+.rgrey{
+border-radius: 5px;
+/*font-size: 14px;*/
+/*font-family: arial, sans-serif;*/
+padding: 7px;
+background:#2E2E2E;
+margin:3 auto;
+color:#fff;
+}
+.rectgrey{
+border-radius: 2px;
+padding:5px;
+background-color:#F2F2F2;
+margin-left:20px;
+width:95%;
+}
+.rectblue{
+border-radius: 2px;
+color:white;
+padding:5px;
+background-color:#2E9AFE;
+margin-left:20px;
+width:95%;
+}
+
+.rectred{
+border-radius: 2px;
+color:white;
+padding:5px;
+background-color:#B40404;
+margin-left:20px;
+width:95%;}
+
+/*==============================================================================
+Classes for page wrapping and sectioning to allot content area.
+================================================================================*/
+
+#wrapme{
+width:100%;
+height:85%;}
+.part{
+font-family:'Monda',arial;
+font-size:15px;
+border:none;
+float:left;
+margin-left:5%;
+width:37%;
+height:70%;
+}
+
+.footer1{
+  position:fixed;
+  z-index:1;
+  background: #C7CCCA; /*#f2f2f2; /*#4CAF50;#97F7CE;*/
+  color:green;
+  text-align:center;
+  font-family:'Garamond';
+  font-size: 1em;
+  bottom:0;
+  width:100%;
+  height: 15px;
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-right: 50px;
+  padding-bottom: 20px;
+  margin-left: -1em;
+}
+
+/*==============================================================================
+Navigation bar styling/formatting.
+================================================================================*/
+
+ul
+{
+float:left;
+width:100%;
+padding:0.5em;
+margin: 0.5em;
+list-style-type:none;
+}
+nav
+{
+border-radius: 4px;
+background-color:#4CAF59;
+color:#FFFFFF;
+float:left;
+text-decoration:none;
+text-align: center;
+padding:0.5em 1.5em;
+margin:0em 1.5em 0em 0em;
+}
+navi:hover {
+border-radius: 4px;
+color:white;
+padding:0.5em 1.5em;
+margin:0em 1.5em 0em 0em;
+background-color:#4CAF50;}
+li {display:inline;}        
+
+navi
+{
+border-radius: 4px;
+background-color:#2E9AFE;
+color:white;
+float:left;
+/*width:10.5em;*/
+text-decoration:none;
+text-align: center;
+padding:0.5em 1.5em;
+margin:0em 1.5em 0em 0em;
+}
+
+.content{
+  border-radius: 2px;
+  background-color:#f2f2f2;
+  padding:20px;
+  margin-top: 20px;
+}
+.content_main2{
+  position: sticky;
+  font-size: 20px;
+  font-family:'Monda', sans-serif; 
+  padding-top:10px;
+  padding-left:350px;
+  padding-right:20px;
+  padding-bottom:20px;
+}
+
+.content_main{
+  position: sticky;
+  border-radius: 2px;
+  font-size: 18px;
+  background-color:#f2f2f2;
+  padding:20px;
+  width: 85%;
+  height:auto;
+  min-height:350px;
+  margin-top: 50px;
+  margin-left: 45px;
+  margin-right: 40px;
+}
+h2 {
+    text-align: center;
+    color: #009939;
+    font-family: Georgia;
+    font-size: 48px;
+}
+
+input[type=text], select {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    background-image: url('images/searchicon.png');
+    background-position: 2px 2px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit]{
+    background-color: #d34836;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type=file]{
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    margin-left: 90px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    margin-right: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+#sbar {
+    width: 600px;
+    position: fixed;
+    align-content: center;
+    top: 35%;
+    left: 25%;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    
+}
+</style>
+</head>
+
+<body>
+<ul>
+<li><a href="/upload"><navi><b>Home</b></navi></a></li>
+<li><a href="/authors"><navi><b>Authors</b></navi></a></li>
+<li><a href="https://github.com/twinklegupta/CS230-Project" target="_blank"><navi><b>GitHub</b></navi></a></li>
+</ul>
+<h2>Team UnwrAPP</h2>
+<div class="content_main">
 <div th:if="${apkName}">
-    <h2 th:text="${apkName}"/>
+    <center><h3> Apps similar to <span style="color:blue" th:text="${apkName}"></span></h3></center>
 </div>
 
 <th:block th:each="apk : ${apkObject}">
     <tr>
-        <td th:text="${apk.apkName}"></td>
-        <td th:text="${apk.apkScore}"></td>
+    	<!-- <td th:text="${apk.iter}"</td> -->
+        <td>App name: <span style="color:blue" th:text="${apk.apkName}"/> | </td>
+        <td>Similarity Score: <span style="color:blue" th:text="${apk.apkScore}"/></td>
+        <br/><br/>
     </tr>
 </th:block>
+</div>
 
+<div class="footer1">
+<b>&copy; 2017 | Team UnwrAPP | Check our <a href="https://github.com/twinklegupta/CS230-Project" target="_blank">GitHub Repository</a></b>
+</div>
 
 </body>
 </html>

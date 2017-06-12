@@ -302,19 +302,40 @@ input[type=submit]:hover {
 <li><a href="/upload"><navi><b>Home</b></navi></a></li>
 <li><a href="/authors"><navi><b>Authors</b></navi></a></li>
 <li><a href="https://github.com/twinklegupta/CS230-Project" target="_blank"><navi><b>GitHub</b></navi></a></li>
+
 </ul>
-<h2>Team UnwrAPP</h2>
-<div id="sbar">
-    <form method="POST" enctype="multipart/form-data" action="/upload">
-        <input type="file" name="file" value="Choose apk to upload" />
-        <input type="submit" value="Submit" />
-    </form>
+
+<br><br>
+<h2> Team UnwrAPP</h2>
+
+
+<div th:if="${message}">
+   <h2 th:text="${message}"/>
 </div>
 
-
+<div class = "content_main">
+<center><h3>Authors</h3></center>
+<div class ="content_main2">
+1. <a href="https://www.linkedin.com/in/anshitamehrotra/" target="_blank">Anshita Mehrotra</a> - amehrotra@cs.ucla.edu <br/><br/>
+2. <a href="https://www.linkedin.com/in/twinkle-gupta-0096967a/" target="_blank">Twinkle Gupta</a> - twinkle.gupta@cs.ucla.edu <br/><br/>
+3. <a href="https://www.linkedin.com/in/brendonfaleiro/" target="_blank">Brendon Faleiro</a> - bren.faleiro@gmail.com <br/><br/>
+4. <a href="https://www.linkedin.com/in/swatiarora2/" target="_blank">Swati Arora</a> - swati.arora@cs.ucla.edu <br/><br/>
+5. <a href="https://www.linkedin.com/in/mitshubh/" target="_blank">Shubham Mittal</a> - mitshubh@cs.ucla.edu <br/><br/>
+6. <a href="https://www.linkedin.com/in/sodhanipranav" target="_blank">Pranav Sodhani</a> - sodhanipranav@cs.ucla.edu <br/><br/>
+</div>
+</div>
 <div class="footer1">
 <b>&copy; 2017 | Team UnwrAPP | Check our <a href="https://github.com/twinklegupta/CS230-Project" target="_blank">GitHub Repository</a></b>
 </div>
 
+<div>
+   <ul>
+       <li th:each="file : ${files}">
+           <a th:href="${file}" th:text="${file}" />
+       </li>
+   </ul>
+</div>
+
 </body>
+
 </html>
