@@ -36,9 +36,13 @@ public class FileUploadController {
         return "display";
     }
 
+    @GetMapping("/authors")
+    public String listAuthors(Model model) throws IOException {
+        return "authors";
+    }
+
     @GetMapping("/upload")
     public String listUploadedFiles(Model model) throws IOException {
-
         return "uploadForm";
     }
 

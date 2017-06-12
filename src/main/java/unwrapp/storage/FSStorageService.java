@@ -15,6 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -44,11 +46,22 @@ public class FSStorageService implements StorageService {
     public void storeSortedApkList(List<String> sortedList) {
         apkSimilarList = new ArrayList<>();
 
+        int iter=0;
         for (String str: sortedList) {
+            if (iter++==5){break;}
             String[] strArr = str.split(" ");
-            ApkObj apkObj = new ApkObj(strArr[0].substring(0, strArr[0].lastIndexOf(".")), strArr[1]);
+            ApkObj apkObj = new ApkObj(iter, strArr[0].substring(0, strArr[0].lastIndexOf(".")), 1 - Float.parseFloat(strArr[1]));
             apkSimilarList.add(apkObj);
         }
+
+        Collections.sort(apkSimilarList, new Comparator<ApkObj>() {
+            @Override
+            public int compare(ApkObj o1, ApkObj o2) {
+                Float val2 = o2.apkScore;
+                Float val1 = o1.apkScore;
+                return val1.compareTo(val2);
+            }
+        });
     }
 
     @Override

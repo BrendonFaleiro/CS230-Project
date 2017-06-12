@@ -5,9 +5,11 @@ package unwrapp.storage;
  */
 public class ApkObj {
     public String apkName;
-    public String apkScore;
+    public float apkScore;
+    public int iter=0;
 
-    public ApkObj(String apkName, String apkScore) {
+    public ApkObj(int iter, String apkName, float apkScore) {
+        this.iter = iter;
         this.apkName = apkName;
         this.apkScore = apkScore;
     }
